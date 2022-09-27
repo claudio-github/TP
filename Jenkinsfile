@@ -29,19 +29,14 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( "http://${registryUrl}", registryCredential ) {
-                    dockerapp.push()
+                    dockerapp.push('latest')
+                    dockerapp.push("${env.BUILD_ID}")
                     }
                 }
             }
         }
 
-        stage ('Docker Run') {
-            steps {
-                script {
-                    sh 'docker run -d -p 80:80 --rm --name web01_container ${registryUrl}/${registryName}' 
-                    }
-                }
-            }
+
         }
     }
 }
