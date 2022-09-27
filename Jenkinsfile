@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                 git url: 'https://github.com/claudio-github/TP.git', branch 'master'
-                sh ls
+                sh 'ls'
                 }
             }
         }
