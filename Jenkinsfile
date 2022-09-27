@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage ('Primeiro stage') {
             steps {
-                sh 'echo "Primeira Pipeline"'
+                sh 'echo "Segunda  Pipeline"'
             }
         }
     }
