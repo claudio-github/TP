@@ -46,7 +46,7 @@ pipeline {
                                         string(credentialsId: 'ARM_TENANT_ID', variable: 'ARM_TENANT_ID')
                                     ]) {
                                         sh 'az login --service-principal --username $ARM_CLIENT_ID --password $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID'
-                                        sh 'az webapp config container set --docker-custom-image-name web01_image:$BUILD_ID --name web01 --resource-group talent-pool-rg'
+                                        sh 'az webapp config container set --docker-custom-image-name web01_image:$BUILD_ID --name web01 --resource-group TALENT-POOL-RG'
                                     }
                                 }
                             }
