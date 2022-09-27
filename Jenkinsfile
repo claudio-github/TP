@@ -37,6 +37,21 @@ pipeline {
             }
         }
 
+            stage ('Deploy no Azure App Service') {
+                        steps {
+                            script {
+                                    withCredentials([
+                                        string(credentialsId: 'ARM_CLIENT_ID', variable: 'ARM_CLIENT_ID'),
+                                        string(credentialsId: 'ARM_CLIENT_SECRET', variable: 'ARM_CLIENT_SECRET'),
+                                        string(credentialsId: 'ARM_TENANT_ID', variable: 'ARM_TENANT_ID')
+                                    ]) {
+                                        sh 'az login --service-principal --username $ARM_CLIENT_ID --password $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID'
+                                        sh 'az webapp config container set --docker-custom-image-name web01_image:$BUILD_ID --name web01 --resource-group talent-pool-rg'
+                                    }
+                                }
+                            }
+                        }
+                    }
 
         }
     }
