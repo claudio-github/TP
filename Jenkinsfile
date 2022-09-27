@@ -2,9 +2,10 @@ pipeline {
     agent any
 
     stages {
-        stage ('Primeiro stage') {
+        stage ('Checkout do codigo') {
             steps {
-                sh 'echo "Segunda  Pipeline"'
+                git url:'https://github.com/claudio-github/TP.git', branch 'main'
+                sh 'ls'
             }
         }
     }
