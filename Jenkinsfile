@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        registryName = "containerRegistryTalentPool"
         registryUrl = "containerregistrytalentpool.azurecr.io"
         registryCredential = "AzureContainerRegistry"
     }
@@ -29,6 +30,15 @@ pipeline {
                 script {
                     docker.withRegistry( "http://${registryUrl}", registryCredential ) {
                     dockerapp.push()
+                    }
+                }
+            }
+        }
+
+        stage ('Docker Run') {
+            steps {
+                script {
+                    sh 'docker run -d -p 80:80 --rm --name web01_container ${registryUrl}/${registryName}' {
                     }
                 }
             }
