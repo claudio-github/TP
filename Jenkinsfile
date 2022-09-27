@@ -5,8 +5,16 @@ pipeline {
         stage ('Checkout do codigo') {
             steps {
                 script {
-                git url: 'https://github.com/claudio-github/TP.git', branch 'master'
                 sh 'ls'
+                }
+            }
+        }
+
+        stage ('Construcao da imagem docker') {
+            steps {
+                script {
+                    dockerapp = docker.build("web01_image:${env.BUILD_ID}",
+                                             '-f Dockerfile .')
                 }
             }
         }
