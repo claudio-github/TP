@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        registryUrl = "containerregistrytalentpool.azurecr.io"
+        registryCredential = "AzureContainerRegistry"
+    }
+
     stages {
         stage ('Checkout do codigo') {
             steps {
@@ -15,6 +20,16 @@ pipeline {
                 script {
                     dockerapp = docker.build("web01_image:${env.BUILD_ID}",
                                              '-f Dockerfile .')
+                }
+            }
+        }
+
+        stage ('Docker push') {
+            steps {
+                script {
+                    docker.withRegistry( "http://${registryUrl}", registryCredential ) {
+                    dockerImage.push()
+                    }
                 }
             }
         }
