@@ -41,8 +41,8 @@ pipeline {
                         steps {
                             script {
 
-                                    withEnv(['ARM_SUBSCRIPTION_ID=ARM_SUBSCRIPTION_ID,
-                                    ARM_TENANT_ID=ARM_TENANT_ID'])
+                                    withEnv(['ARM_SUBSCRIPTION_ID=ARM_SUBSCRIPTION_ID',
+                                    'ARM_TENANT_ID=ARM_TENANT_ID'])
 
 
                                     withCredentials([
