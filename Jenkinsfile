@@ -41,17 +41,17 @@ pipeline {
                         steps {
                             script {
 
-                                    withEnv(['ARM_SUBSCRIPTION_ID=ARM_SUBSCRIPTION_ID',
-                                    'ARM_TENANT_ID=ARM_TENANT_ID']) {
+                                    withEnv(["ARM_SUBSCRIPTION_ID=ARM_SUBSCRIPTION_ID",
+                                    "ARM_TENANT_ID=ARM_TENANT_ID"]) {
 
 
                                     withCredentials([
-                                        string(credentialsId: 'ARM_CLIENT_ID', variable: 'ARM_CLIENT_ID'),
+                                        string(credentialsId: "ARM_CLIENT_ID", variable: "ARM_CLIENT_ID"),
                                         string(credentialsId: 'ARM_CLIENT_SECRET', variable: 'ARM_CLIENT_SECRET'),
                                         string(credentialsId: 'ARM_TENANT_ID', variable: 'ARM_TENANT_ID')
                                     ]) {
 
-                                     azureWebAppPublish azureCredentialsId: '$ARM_CLIENT_ID', publishType: 'docker',
+                                     azureWebAppPublish azureCredentialsId: "ARM_CLIENT_ID", publishType: 'docker',
                                                         resourceGroup: 'TALENT-POOL-RG', appName: 'webtalentpool',
                                                         dockerImageName: 'web01_image', dockerImageTag: 'latest',
                                                         dockerRegistryEndpoint: [credentialsId: '${registryCredential}', url: "${registryUrl}"]       
