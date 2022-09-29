@@ -40,11 +40,11 @@ pipeline {
             stage ('Deploy no Azure App Service') {
                         steps {
                             script {
-                                    withCredentials([
+                                    /*withCredentials([
                                         string(credentialsId: 'ARM_CLIENT_ID', variable: 'ARM_CLIENT_ID'),
                                         string(credentialsId: 'ARM_CLIENT_SECRET', variable: 'ARM_CLIENT_SECRET'),
                                         string(credentialsId: 'ARM_TENANT_ID', variable: 'ARM_TENANT_ID')
-                                    ]) {
+                                    ])*/ {
 
                                      azureWebAppPublish azureCredentialsId: "$ARM_CLIENT_ID", publishType: 'docker',
                                                         resourceGroup: 'TALENT-POOL-RG', appName: 'webtalentpool',
