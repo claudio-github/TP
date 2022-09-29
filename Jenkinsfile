@@ -42,7 +42,7 @@ pipeline {
                             script {
 
                                     withEnv(['ARM_SUBSCRIPTION_ID=ARM_SUBSCRIPTION_ID',
-                                    'ARM_TENANT_ID=ARM_TENANT_ID'])
+                                    'ARM_TENANT_ID=ARM_TENANT_ID']) {
 
 
                                     withCredentials([
@@ -55,7 +55,7 @@ pipeline {
                                                         resourceGroup: 'TALENT-POOL-RG', appName: 'webtalentpool',
                                                         dockerImageName: 'web01_image', dockerImageTag: 'latest',
                                                         dockerRegistryEndpoint: [credentialsId: '${registryCredential}', url: "${registryUrl}"]       
-
+                                    }
 
 
 
