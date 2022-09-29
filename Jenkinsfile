@@ -51,7 +51,7 @@ pipeline {
                                         string(credentialsId: 'ARM_TENANT_ID', variable: 'ARM_TENANT_ID')
                                     ]) {
 
-                                     azureWebAppPublish azureCredentialsId: 'ARM_CLIENT_ID', publishType: 'docker',
+                                     azureWebAppPublish azureCredentialsId: '$ARM_CLIENT_ID', publishType: 'docker',
                                                         resourceGroup: 'TALENT-POOL-RG', appName: 'webtalentpool',
                                                         dockerImageName: 'web01_image', dockerImageTag: 'latest',
                                                         dockerRegistryEndpoint: [credentialsId: '${registryCredential}', url: "${registryUrl}"]       
