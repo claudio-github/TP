@@ -5,7 +5,7 @@ pipeline {
         registryName = "containerRegistryTalentPool"
         registryUrl = "containerregistrytalentpool.azurecr.io"
         registryCredential = "AzureContainerRegistry"
-        arm_client = ARM_CLIENT_ID
+        arm_client = "ARM_CLIENT_ID"
     }
 
     stages {
