@@ -45,8 +45,18 @@ pipeline {
                                         string(credentialsId: 'ARM_CLIENT_SECRET', variable: 'ARM_CLIENT_SECRET'),
                                         string(credentialsId: 'ARM_TENANT_ID', variable: 'ARM_TENANT_ID')
                                     ]) {
-                                        sh 'az login --service-principal --username $ARM_CLIENT_ID --password $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID'
-                                        sh 'az webapp config container set --name webtalentpool --resource-group TALENT-POOL-RG --docker-custom-image-name containerregistrytalentpool.azurecr.io/web01_image:$BUILD_ID'
+
+                                     azureWebAppPublish azureCredentialsId: 'ARM_CLIENT_ID', publishType: 'docker',
+                                                        resourceGroup: 'TALENT-POOL-RG', appName: 'webtalentpool',
+                                                        dockerImageName: 'web01_image', dockerImageTag: 'latest',
+                                                        dockerRegistryEndpoint: [credentialsId: '${registryCredential}', url: "${registryUrl}"]       
+
+
+
+
+
+                                        //sh 'az login --service-principal --username $ARM_CLIENT_ID --password $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID'
+                                        //sh 'az webapp config container set --name webtalentpool --resource-group TALENT-POOL-RG --docker-custom-image-name containerregistrytalentpool.azurecr.io/web01_image:$BUILD_ID'
                                     }
                                 }
                             }
