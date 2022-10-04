@@ -2,9 +2,8 @@ pipeline {
     agent any
 
     environment {
-        registryName = "containerRegistryTalentPool"
-        registryUrl = "containerregistrytalentpool.azurecr.io"
-        registryCredential = "AzureContainerRegistry"
+        REGISTRYURL = credentials('REGISTRYURL')
+        REGISTRYCREDENTIAL = "REGISTRYCREDENTIAL"
     }
 
     stages {
@@ -29,7 +28,7 @@ pipeline {
         stage ('Docker push') {
             steps {
                 script {
-                    docker.withRegistry( "http://${registryUrl}", registryCredential ) {
+                    docker.withRegistry( "http://${REGISTRYURL}", REGISTRYCREDENTIAL ) {
                     dockerapp.push('latest')
                     dockerapp.push("${env.BUILD_ID}")
                     }
@@ -46,7 +45,7 @@ pipeline {
                                         string(credentialsId: 'ARM_TENANT_ID', variable: 'ARM_TENANT_ID')
                                     ]) {
                                         sh 'az login --service-principal --username $ARM_CLIENT_ID --password $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID'
-                                        sh 'az webapp config container set --name webtalentpool --resource-group TALENT-POOL-RG --docker-custom-image-name containerregistrytalentpool.azurecr.io/web01_image:$BUILD_ID'
+                                        sh 'az webapp config container set --name webtalentpool --resource-group TALENT-POOL-RG --docker-custom-image-name $REGISTRYURL/web01_image:$BUILD_ID'
                                     }
                                 }
                             }
