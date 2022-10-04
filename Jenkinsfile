@@ -5,6 +5,7 @@ pipeline {
         REGISTRYURL = credentials('REGISTRYURL')
         REGISTRYCREDENTIAL = "REGISTRYCREDENTIAL"
         RESOURCE_GROUP = "talentpool-rg"
+        APPSERVICENAME = "webapptalentpool001"
     }
 
     stages {
@@ -46,7 +47,7 @@ pipeline {
                                         string(credentialsId: 'ARM_TENANT_ID', variable: 'ARM_TENANT_ID')
                                     ]) {
                                         sh 'az login --service-principal --username $ARM_CLIENT_ID --password $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID'
-                                        sh 'az webapp config container set --name webtalentpool --resource-group $RESOURCE_GROUP --docker-custom-image-name $REGISTRYURL/web01_image:$BUILD_ID'
+                                        sh 'az webapp config container set --name $APPSERVICENAME --resource-group $RESOURCE_GROUP --docker-custom-image-name $REGISTRYURL/web01_image:$BUILD_ID'
                                     }
                                 }
                             }
