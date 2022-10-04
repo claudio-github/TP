@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        REGISTRYURL = credentials('REGISTRYURL')
+        //REGISTRYURL = credentials('REGISTRYURL')
+        REGISTRYURL = "containerregistrytp0001.azurecr.io"
         REGISTRYCREDENTIAL = "REGISTRYCREDENTIAL"
         RESOURCE_GROUP = "talentpool-rg"
         APPSERVICENAME = "webapptalentpool001"
