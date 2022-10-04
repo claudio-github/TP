@@ -8,7 +8,29 @@ pipeline {
         APPSERVICENAME = "webapptalentpool001"
     }
 
+
+      options {
+        skipDefaultCheckout(true)
+    }
+
     stages {
+
+        stage('Clean workspace') {
+            steps{
+                script{
+                    cleanWs()
+                }
+            }
+        }
+
+          stage('Checkout') {
+            steps{
+                script{
+                    checkout scm
+                }
+            }
+        } 
+
         stage ('Checkout do codigo') {
             steps {
                 script {
