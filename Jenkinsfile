@@ -6,7 +6,7 @@ pipeline {
         REGISTRYURL = "containerregistrytp0001.azurecr.io"
         REGISTRYCREDENTIAL = "REGISTRYCREDENTIAL"
         RESOURCE_GROUP = "talentpoolproject0001-rg"
-        APPSERVICENAME = "webapptalentpool001"
+        APPSERVICENAME = "talentpoolproject0001"
     }
 
 
