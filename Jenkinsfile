@@ -8,7 +8,7 @@ pipeline {
         RESOURCE_GROUP = "talentpoolproject0001-rg"
         APPSERVICENAME = "talentpoolproject0001"
         IMAGE_NAME = "web01_image"
-        azureCredentialsId = credentials('AZURECREDENTIALSID')
+        AZURECREDENTIALSID = credentials('AZURECREDENTIALSID')
     }
 
 
@@ -72,7 +72,7 @@ pipeline {
                                         string(credentialsId: 'ARM_TENANT_ID', variable: 'ARM_TENANT_ID')
                                     ]) {*/
 
-                                        azureWebAppPublish azureCredentialsId: '$azureCredentialsId', publishType: 'docker',
+                                        azureWebAppPublish azureCredentialsId: '${AZURECREDENTIALSID}', publishType: 'docker',
                                                            resourceGroup: '$RESOURCE_GROUP', appName: '$APPSERVICENAME',
                                                            dockerImageName: '$IMAGE_NAME', dockerImageTag: '$BUILD_ID',
                                                            dockerRegistryEndpoint: [credentialsId: 'REGISTRYCREDENTIAL', url: "$REGISTRYURL"]
