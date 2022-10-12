@@ -72,7 +72,7 @@ pipeline {
                                         string(credentialsId: 'ARM_TENANT_ID', variable: 'ARM_TENANT_ID')
                                     ]) {*/
 
-                                        azureWebAppPublish azureCredentialsId: '${AZURECREDENTIALSID}', publishType: 'docker',
+                                        azureWebAppPublish azureCredentialsId: AZURECREDENTIALSID, publishType: 'docker',
                                                            resourceGroup: '$RESOURCE_GROUP', appName: '$APPSERVICENAME',
                                                            dockerImageName: '$IMAGE_NAME', dockerImageTag: '$BUILD_ID',
                                                            dockerRegistryEndpoint: [credentialsId: 'REGISTRYCREDENTIAL', url: "$REGISTRYURL"]
